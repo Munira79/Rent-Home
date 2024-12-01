@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_3"
+    android:background="@drawable/img7"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center"
@@ -14,11 +14,12 @@
         android:id="@+id/tv_login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#79AFDB"
         android:text="Login"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_marginBottom="24dp"
-        android:textColor="#3F51B5" />
+        android:textColor="#081559" />
 
     <EditText
         android:id="@+id/et_username"
@@ -28,7 +29,7 @@
         android:inputType="text"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background"
+        android:background="@android:drawable/editbox_dropdown_light_frame"
         android:autofillHints="username" />
 
     <EditText
@@ -39,7 +40,7 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:layout_marginBottom="24dp"
-        android:background="@android:drawable/editbox_background"
+        android:background="@android:drawable/editbox_background_normal"
         android:autofillHints="password" />
 
     <LinearLayout

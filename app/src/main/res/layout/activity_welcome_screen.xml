@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_1"
+    android:background="@drawable/img_4"
     tools:context=".WelcomeScreen">
 
 
@@ -16,20 +16,31 @@
         android:layout_below="@id/logo"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="24dp"
         android:text="Welcome to HoMeQuEsT"
-        android:background="@android:color/darker_gray"
+        android:background="#FFEB3B"
         android:textColor="#092D73"
         android:textSize="28sp"
         android:textStyle="bold" />
+
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="200dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="30dp"
         android:src="@drawable/img" />
+
+    <ImageView
+        android:id="@+id/logo1"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/img" />
+
+
 
 </RelativeLayout>

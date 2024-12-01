@@ -1,24 +1,37 @@
 package com.example.homequest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_home);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        Button btnInsertHome = findViewById(R.id.btn_insert_home);
+        Button btnViewHome = findViewById(R.id.btn_view_home);
+        ImageButton chatButton = findViewById(R.id.chat_button); // Add this line
+
+        btnInsertHome.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminHomeActivity.this, InsertHomeDetails.class);
+            startActivity(intent);
+        });
+
+        btnViewHome.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminHomeActivity.this, ViewHomeDetail.class);
+            startActivity(intent);
+        });
+
+        // Set an OnClickListener for the chat button
+        chatButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminHomeActivity.this, AdminMessage.class);
+            startActivity(intent);
         });
     }
 }

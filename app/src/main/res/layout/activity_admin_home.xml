@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminHomeActivity">
+    android:background="@drawable/img_3"
+    android:orientation="vertical"
+    android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="266dp"
+        android:layout_height="55dp"
+        android:text="  Hello Admin!"
+        android:layout_marginTop="60dp"
+        android:background="#579FD9"
+        android:layout_gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_insert_home"
+        android:layout_width="200dp"
+        android:layout_height="62dp"
+        android:backgroundTint="#E91E63"
+        android:layout_marginTop="16dp"
+        android:text="Insert HomeDetails" />
+
+    <Button
+        android:id="@+id/btn_view_home"
+        android:layout_width="200dp"
+        android:layout_height="89dp"
+        android:backgroundTint="#E91E63"
+        android:text="View HomeDetails\nUpdate HomeDetails\nDelete HomeDetails" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/black"
+        android:layout_marginTop="200dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/chat_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/chat"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_home_24"
+            android:scaleType="fitCenter"
+            />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/settings"
+            android:scaleType="fitCenter"/>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
