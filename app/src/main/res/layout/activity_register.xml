@@ -66,11 +66,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="phone"
-        android:inputType="textPassword"
+        android:inputType="phone"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
         android:background="@android:drawable/editbox_background"
-        android:autofillHints="username" />
+        android:autofillHints="phone" />
 
 
     <LinearLayout

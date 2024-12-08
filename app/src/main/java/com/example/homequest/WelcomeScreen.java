@@ -48,6 +48,6 @@ public class WelcomeScreen extends AppCompatActivity {
                 startActivity(myIntent);
                 finish();
             }
-        }, 5000);
+        }, 2000);
     }
 }
