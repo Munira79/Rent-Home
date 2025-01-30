@@ -1,8 +1,10 @@
 package com.example.homequest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -10,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class OtherActivity extends AppCompatActivity {
 
-    private CheckBox firstCheckBox, secondCheckBox, thirdCheckBox;
+    private RadioGroup preferenceRadioGroup;
     private RatingBar ratingBar;
     private Button submitButton;
 
@@ -20,33 +22,36 @@ public class OtherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_other); // Ensure the correct layout is used
 
         // Initialize the views
-        firstCheckBox = findViewById(R.id.first_check_box);
-        secondCheckBox = findViewById(R.id.second_check_box);
-        thirdCheckBox = findViewById(R.id.third_check_box);
+        preferenceRadioGroup = findViewById(R.id.preferenceRadioGroup);
         ratingBar = findViewById(R.id.ratingBar);
         submitButton = findViewById(R.id.submitButton);
 
         // Set up the Submit button click listener
         submitButton.setOnClickListener(view -> {
-            // Get the CheckBox selections
-            StringBuilder preferences = new StringBuilder("Preference: ");
-            if (firstCheckBox.isChecked()) {
-                preferences.append("Bad ");
+            // Get the selected RadioButton ID from RadioGroup
+            int selectedRadioButtonId = preferenceRadioGroup.getCheckedRadioButtonId();
+
+            // Ensure a selection is made
+            if (selectedRadioButtonId == -1) {
+                Toast.makeText(OtherActivity.this, "Please select a preference", Toast.LENGTH_SHORT).show();
+                return;
             }
-            if (secondCheckBox.isChecked()) {
-                preferences.append("Good ");
-            }
-            if (thirdCheckBox.isChecked()) {
-                preferences.append("Best ");
-            }
+
+            // Get the text of the selected RadioButton
+            RadioButton selectedRadioButton = findViewById(selectedRadioButtonId);
+            String selectedPreference = selectedRadioButton.getText().toString();
 
             // Get the rating from RatingBar
             float rating = ratingBar.getRating();
 
-            // Display the selected preferences and rating as a toast
+            // Display the selected preference and rating as a toast
             Toast.makeText(OtherActivity.this,
-                    preferences + "\nRating: " + rating,
+                    "Preference: " + selectedPreference + "\nRating: " + rating,
                     Toast.LENGTH_SHORT).show();
+
+            // Navigate to SearchActivity
+            Intent intent = new Intent(OtherActivity.this, SearchActivity.class);
+            startActivity(intent);
         });
     }
 }

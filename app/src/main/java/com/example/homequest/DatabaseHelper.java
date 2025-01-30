@@ -5,11 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "HomeQuest_DB";
-    public static final int DATABASE_VERSION = 5; // Incremented version
+    public static final int DATABASE_VERSION = 8; // Incremented version
 
     // Table and Column names for Register table
     private static final String TABLE_REGISTER = "register";
@@ -95,6 +96,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userExists; // Return true if a user exists with the given credentials
     }
 
+    // Method to retrieve all registered users
+    public Cursor getAllUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_REGISTER, null);
+    }
+
+
     // Method to insert home details
     public boolean insertHome(String houseName, String location, int totalRoom, double rentAmount, byte[] houseImage) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -117,9 +125,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Method to retrieve home details by house name
     public Cursor getHomeByName(String houseName) {
+        houseName = houseName.trim(); // Ensure the input is trimmed
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_HOMES + " WHERE " + COL_HOUSE_NAME + " = ?", new String[]{houseName});
+        Log.d("DatabaseHelper", "Searching for house: " + houseName); // Log for debugging
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_HOMES + " WHERE " + COL_HOUSE_NAME + " = ?", new String[]{houseName});
+        if (cursor != null && cursor.getCount() > 0) {
+            Log.d("DatabaseHelper", "House found: " + houseName); // Log for debugging
+        } else {
+            Log.d("DatabaseHelper", "House not found: " + houseName); // Log for debugging
+        }
+        return cursor;
     }
+
 
     // Method to delete home by house name
     public int deleteHome(String houseName) {
@@ -157,5 +174,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + TABLE_MESSAGES, null);
     }
 
-    // Other existing methods...
+    // Method to retrieve a user by username(24 january)
+    public Cursor getUserByUsername(String username) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_REGISTER + " WHERE " + COL_USERNAME + " = ?";
+        return db.rawQuery(query, new String[]{username});
+    }
+
+
+    public boolean isEmailUnique(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_REGISTER + " WHERE " + COL_EMAIL + " = ?", new String[]{email});
+        boolean isUnique = !cursor.moveToFirst(); // If no records exist, email is unique
+        cursor.close();
+        return isUnique;
+    }
+
+    public boolean isPhoneUnique(String mobile) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_REGISTER + " WHERE " + COL_MOBILE + " = ?", new String[]{mobile});
+        boolean isUnique = !cursor.moveToFirst(); // If no records exist, phone is unique
+        cursor.close();
+        return isUnique;
+    }
+
 }

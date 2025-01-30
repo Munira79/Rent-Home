@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="#94C8E0"
+    android:background="#C5E5F4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -11,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="648dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -24,30 +23,37 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:text="Select one" />
 
-        <CheckBox
-            android:id="@+id/first_check_box"
+        <!-- RadioGroup replacing CheckBoxes -->
+        <RadioGroup
+            android:id="@+id/preferenceRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bad" />
+            android:layout_marginTop="10dp">
 
-        <CheckBox
-            android:id="@+id/second_check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Good" />
+            <RadioButton
+                android:id="@+id/radio_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bad" />
 
-        <CheckBox
-            android:id="@+id/third_check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Best" />
+            <RadioButton
+                android:id="@+id/radio_good"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good" />
 
+            <RadioButton
+                android:id="@+id/radio_best"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Best" />
+        </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"

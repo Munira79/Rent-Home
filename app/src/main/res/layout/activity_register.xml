@@ -76,31 +76,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center">
 
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:backgroundTint="#0E2E8C"
+            android:textColor="#E7DDDD"
+            android:layout_marginEnd="8dp" />
 
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="0dp"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Login"
-            android:padding="12dp"
             android:backgroundTint="#6B828A"
-            android:textColor="@android:color/white"
-            android:layout_marginStart="8dp" />
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Register"
-            android:padding="12dp"
-            android:backgroundTint="#0E2E8C"
-            android:textColor="#E7DDDD"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="8dp"
+            android:text="Login"
+            android:textColor="@android:color/white" />
+
 
     </LinearLayout>
 

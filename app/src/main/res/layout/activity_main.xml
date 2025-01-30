@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img7"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="30dp"
     android:gravity="center"
     tools:context=".MainActivity">
 
+    <!-- Login Title -->
     <TextView
         android:id="@+id/tv_login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#79AFDB"
+        android:background="#727FCC"
         android:text="Login"
         android:textSize="40sp"
         android:textStyle="bold"
         android:layout_marginBottom="24dp"
         android:textColor="#081559" />
 
+    <!-- Username Input -->
     <EditText
         android:id="@+id/et_username"
         android:layout_width="match_parent"
@@ -32,17 +35,26 @@
         android:background="@android:drawable/editbox_dropdown_light_frame"
         android:autofillHints="username" />
 
-    <EditText
-        android:id="@+id/et_password"
+    <!-- Password Input with TextInputLayout -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:padding="12dp"
         android:layout_marginBottom="24dp"
-        android:background="@android:drawable/editbox_background_normal"
-        android:autofillHints="password" />
+        app:endIconMode="password_toggle">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:autofillHints="password" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Buttons for Login and Register -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +68,7 @@
             android:layout_weight="1"
             android:text="Register"
             android:padding="12dp"
-            android:backgroundTint="#363A85"
+            android:backgroundTint="#020E50"
             android:textColor="#E7DDDD"
             android:layout_marginEnd="8dp" />
 
@@ -67,10 +79,8 @@
             android:layout_weight="1"
             android:text="Login"
             android:padding="12dp"
-            android:backgroundTint="#667BA0"
+            android:backgroundTint="#3F51B5"
             android:textColor="@android:color/white"
             android:layout_marginStart="8dp" />
-
     </LinearLayout>
-
 </LinearLayout>

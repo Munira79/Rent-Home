@@ -74,6 +74,6 @@ public class DisplayHome extends AppCompatActivity {
         private void handleFavourite() {
             Intent intent = new Intent(DisplayHome.this, FavouriteActivity.class);
             startActivity(intent);
-            Toast.makeText(this, "Popular button clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Favourite button clicked", Toast.LENGTH_SHORT).show();
         }
     }

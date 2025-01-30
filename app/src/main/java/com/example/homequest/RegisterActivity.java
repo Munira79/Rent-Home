@@ -52,13 +52,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // Validation method for inputs
     private boolean validateInputs() {
         String username = etUsername.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
         String mobile = etMobile.getText().toString().trim();
+
+        DatabaseHelper dbHelper = new DatabaseHelper(RegisterActivity.this);
 
         // Validate Username
         if (TextUtils.isEmpty(username)) {
@@ -76,9 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
             etEmail.setError("Please enter a valid email address");
             etEmail.requestFocus();
             return false;
+        } else if (!dbHelper.isEmailUnique(email)) {
+            etEmail.setError("This email is already registered! Please use a different email.");
+            etEmail.requestFocus();
+            return false;
         }
-        DatabaseHelper dbHelper = new DatabaseHelper(RegisterActivity.this);
-        boolean isInserted = dbHelper.insertUser(username, email, password, mobile);
 
         // Validate Password
         if (TextUtils.isEmpty(password)) {
@@ -95,6 +98,10 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         } else if (!Pattern.compile("[a-z]").matcher(password).find()) {
             etPassword.setError("Password must contain at least one lowercase letter");
+            etPassword.requestFocus();
+            return false;
+        } else if (!Pattern.compile("[!@#$%^&*(),.?\":{}|<>]").matcher(password).find()) {
+            etPassword.setError("Password must contain at least one special character (e.g., !@#$%^&*)");
             etPassword.requestFocus();
             return false;
         }
@@ -119,8 +126,20 @@ public class RegisterActivity extends AppCompatActivity {
             etMobile.setError("Mobile number must be 11 digits and start with '01'");
             etMobile.requestFocus();
             return false;
+        } else if (!dbHelper.isPhoneUnique(mobile)) {
+            etMobile.setError("This mobile number is already registered! Please use a different mobile number.");
+            etMobile.requestFocus();
+            return false;
         }
 
+        // If all validations pass, insert the user
+        boolean isInserted = dbHelper.insertUser(username, email, password, mobile);
+        if (!isInserted) {
+            Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
         return true;
     }
 }

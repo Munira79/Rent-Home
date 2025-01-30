@@ -21,7 +21,7 @@ public class WelcomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // For full screen
+        // For full-screen by hiding the status bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome_screen);
 
@@ -44,7 +44,7 @@ public class WelcomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent myIntent = new Intent(WelcomeScreen.this, IdentifyActivity.class);
+                Intent myIntent = new Intent(WelcomeScreen.this, MainActivity.class);
                 startActivity(myIntent);
                 finish();
             }

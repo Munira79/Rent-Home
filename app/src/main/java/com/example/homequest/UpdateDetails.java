@@ -13,15 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class UpdateDetails extends AppCompatActivity {
-
-    private static final int PICK_IMAGE_REQUEST = 1;
 
     private EditText editTextHouseName;
     private EditText editTextLocation;
@@ -35,6 +34,24 @@ public class UpdateDetails extends AppCompatActivity {
 
     private DatabaseHelper databaseHelper;
     private byte[] houseImageByteArray;
+
+    // ActivityResultLauncher for picking an image
+    private final ActivityResultLauncher<Intent> imagePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri imageUri = result.getData().getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                        imageViewHouse.setImageBitmap(bitmap);
+                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                        houseImageByteArray = byteArrayOutputStream.toByteArray();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,25 +114,7 @@ public class UpdateDetails extends AppCompatActivity {
 
     private void selectImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                imageViewHouse.setImageBitmap(bitmap);
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-                houseImageByteArray = byteArrayOutputStream.toByteArray();
-            } catch (IOException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
-            }
-        }
+        imagePickerLauncher.launch(intent);
     }
 
     private void updateHome() {
